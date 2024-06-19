@@ -1,3 +1,3 @@
-# project
-To view a live example, **[click here](https://ak-0283.github.io/projects/Project%201/)**
+# projects
+To view a live example of my first project, **[click here](https://ak-0283.github.io/projects/Project%201/)**
 
