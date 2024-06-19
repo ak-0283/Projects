@@ -25,7 +25,7 @@ To view code, **[click here](https://github.com/ak-0283/Projects/tree/main/Proje
 ✔️ About \
 ✔️ Skills \
 ✔️ Work\
-✔️ Contact Info
+✔️ Contact
 
 ## Contributing 💡
 #### Step 1
