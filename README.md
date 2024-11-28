@@ -63,7 +63,7 @@ To view code, **[click here](https://github.com/ak-0283/Projects/tree/main/Proje
 ⚡️ Easy to modify
 To view a live example, **[click here](https://ak-0283.github.io/Projects/project%202/)**
 <br>
-To view code, **[click here]()**
+To view code, **[click here](https://github.com/ak-0283/Projects/tree/main/project%202)**
 ## Contributing 💡
 #### Step 1
 
