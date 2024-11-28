@@ -50,7 +50,7 @@ To view code, **[click here](https://github.com/ak-0283/Projects/tree/main/Proje
 ### Website Preview
 <p align="center"> 
   <kbd>
-   <a href="https://ak-0283.github.io" target="_blank"><img src="project 2/page.png">
+   <a href="https://ak-0283.github.io" target="_blank"><img src="project 2/Screenshot 2024-11-28 143646.png">
   </a>
   </kbd>
 </p>
@@ -64,13 +64,6 @@ To view code, **[click here](https://github.com/ak-0283/Projects/tree/main/Proje
 To view a live example, **[click here](https://ak-0283.github.io/Projects/project%202/)**
 <br>
 To view code, **[click here]()**
-
-## Sections 📚
-✔️ About \
-✔️ Skills \
-✔️ Work\
-✔️ Contact
-
 ## Contributing 💡
 #### Step 1
 
