@@ -44,3 +44,40 @@ To view code, **[click here](https://github.com/ak-0283/Projects/tree/main/Proje
 #### Step 3
 
 - 🔃 Create a new pull request.
+
+
+# 2. In the second Folder Project 2⚡️ 
+### Website Preview
+<p align="center"> 
+  <kbd>
+   <a href="https://ak-0283.github.io" target="_blank"><img src="project 2/Screenshot 2024-11-28 143646.png">
+  </a>
+  </kbd>
+</p>
+
+:star: Star me on GitHub — it helps!
+
+## Features 📋
+⚡️ Fully Responsive\
+⚡️ Valid HTML5,CSS3,JS\
+⚡️ Easy to modify
+To view a live example, **[click here](https://ak-0283.github.io/Projects/project%202/)**
+<br>
+To view code, **[click here](https://github.com/ak-0283/Projects/tree/main/project%202)**
+## Contributing 💡
+#### Step 1
+
+- **Option 1**
+    - 🍴 Fork this repo!
+
+- **Option 2**
+    - 👯 Clone this repo to your local machine.
+
+
+#### Step 2
+
+- **Build your code** 🔨🔨🔨
+
+#### Step 3
+
+- 🔃 Create a new pull request.
