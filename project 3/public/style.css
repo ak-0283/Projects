@@ -1,0 +1,122 @@
+body{
+    margin-left: 20px;
+    background-color: palevioletred;
+}
+
+.chat{
+    background-color: rgb(102, 182, 252);
+    padding: 20px;
+    border-radius: 16px;
+    display: inline-block;
+}
+.msg{
+    background-color: rgb(10, 116, 222);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 16px;
+}
+
+.chat:hover{
+    background-color: aqua;
+}
+
+.msg:hover{
+    background-color: tomato;
+}
+
+/* General Button Styling */
+button {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  /* Edit Button Style */
+  form[action*="/edit"] button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+  
+  form[action*="/edit"] button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+  
+  /* Delete Button Style */
+  form[action*="DELETE"] button {
+    background-color: #f44336; /* Red */
+    color: white;
+  }
+  
+  form[action*="DELETE"] button:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+  }
+  
+  /* Optional: Style for "New Chat" Button */
+  form[action="/chats/new"] button {
+    background-color: #008CBA; /* Blue */
+    color: white;
+  }
+  
+  form[action="/chats/new"] button:hover {
+    background-color: #007bb5;
+  }
+
+
+/* Button styling */
+button#chat {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 12px 25px; /* Padding for button */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 8px; /* Rounded corners */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Button hover effect */
+button#chat:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+/* Button active effect (when clicked) */
+button#chat:active {
+    background-color: #388e3c; /* Even darker green when button is pressed */
+    transform: translateY(0); /* Return to normal position */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Return shadow */
+}
+
+
+
+/* Scroll to Top Button */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  display: none; /* Initially hidden */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
