@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Contact</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert {{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<section>
+	<h3>Get In Touch</h3>
+	<p>Have questions, suggestions, or need support? Send a message using the form or reach out via the quick contacts below.</p>
+
+	<form action="/contact" method="post">
+		<label for="name">Your Name</label>
+		<input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+		<label for="email">Email</label>
+		<input type="email" id="email" name="email" placeholder="name@example.com" required>
+
+		<label for="message">Message</label>
+		<textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+		<div class="form-actions">
+			<button type="submit">Send Message</button>
+			<a href="mailto:abhay@example.com" class="cta" style="margin-left:10px;">Email Directly</a>
+		</div>
+	</form>
+</section>
+
+<section>
+	<h3>Quick Contacts</h3>
+	<div class="grid">
+		<div class="card contact-card">
+			<div class="icon">📧</div>
+			<h4>Email</h4>
+			<p><a href="mailto:abhay@example.com">abhay@example.com</a></p>
+		</div>
+		<div class="card contact-card">
+			<div class="icon">📞</div>
+			<h4>Phone</h4>
+			<p><a href="tel:+91-0000000000">+91 00000 00000</a></p>
+		</div>
+		<div class="card contact-card">
+			<div class="icon">⏰</div>
+			<h4>Hours</h4>
+			<p>Mon–Fri, 10:00–17:00 IST</p>
+		</div>
+		<div class="card contact-card">
+			<div class="icon">💬</div>
+			<h4>Feedback</h4>
+			<p>Share ideas to improve the AI Attendance system.</p>
+		</div>
+	</div>
+</section>
+
+<section>
+	<h3>Support & Resources</h3>
+	<ul>
+		<li>Read more about the project on the <a href="/about">About</a> page.</li>
+		<li>Explore the <a href="/dataset">Dataset</a> details.</li>
+		<li>Check training metrics on <a href="/results">Results</a>.</li>
+		<li>Try a prediction on the <a href="/predict" class="cta">Predict</a> page.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Privacy</h3>
+	<div class="alert info">
+		We store messages securely and use your contact details only to respond to inquiries.
+	</div>
+	<p>For sensitive information, prefer email and avoid attaching personal data without anonymization.</p>
+</section>
+
+<section>
+	<h3>FAQ</h3>
+	<p><strong>Is the form functional?</strong> If your app route accepts POST at <code>/contact</code>, messages will be processed server-side. Otherwise, use the direct email link.</p>
+	<p><strong>Can I request new features?</strong> Yes — send ideas via the form or email.</p>
+</section>
+
+<section>
+  <h3>Contact Features</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Secure Messaging</h4>
+      <p>Form data handled with care and privacy-first guidance.</p>
+    </div>
+    <div class="card">
+      <h4>Multiple Channels</h4>
+      <p>Email, phone, and direct feedback options to suit you.</p>
+    </div>
+    <div class="card">
+      <h4>Fast Responses</h4>
+      <p>Typical reply within business hours (Mon–Fri, 10:00–17:00 IST).</p>
+    </div>
+    <div class="card">
+      <h4>Project Support</h4>
+      <p>Get help with training, datasets, and predictions.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3>Social Links</h3>
+  <ul class="social-links">
+    <li>🔗 <a href="#" aria-label="Website">Website</a></li>
+    <li>🐙 <a href="#" aria-label="GitHub">GitHub</a></li>
+    <li>💼 <a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+  </ul>
+</section>
+
+<script>
+// Copy-to-clipboard for quick contacts
+(function(){
+  var copy = function(text){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(showCopied, showError);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); showCopied(); } catch(e){ showError(); }
+      document.body.removeChild(ta);
+    }
+  };
+  function showCopied(){
+    var a = document.createElement('div');
+    a.className = 'alert success';
+    a.textContent = 'Copied to clipboard';
+    document.body.appendChild(a);
+    setTimeout(function(){ a.remove(); }, 1500);
+  }
+  function showError(){ /* silent */ }
+  var emailLink = document.querySelector('.contact-card a[href^="mailto:"]');
+  var phoneLink = document.querySelector('.contact-card a[href^="tel:"]');
+  if (emailLink) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn-secondary copy-btn';
+    btn.textContent = 'Copy Email';
+    emailLink.parentElement.appendChild(btn);
+    btn.addEventListener('click', function(){ copy(emailLink.textContent.trim()); });
+  }
+  if (phoneLink) {
+    var btn2 = document.createElement('button');
+    btn2.type = 'button';
+    btn2.className = 'btn-secondary copy-btn';
+    btn2.textContent = 'Copy Number';
+    phoneLink.parentElement.appendChild(btn2);
+    btn2.addEventListener('click', function(){ copy(phoneLink.textContent.trim()); });
+  }
+})();
+</script>
+{% endblock %}

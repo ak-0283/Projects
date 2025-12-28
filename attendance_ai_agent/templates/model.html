@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Model</h2>
+
+<section class="model-card">
+	<h3>Overview</h3>
+	<p>
+		The system uses a tree-based ensemble (e.g., Random Forest) to classify student performance risk into <span class="badge safe">Safe</span>, <span class="badge risk">At Risk</span>, and <span class="badge critical">Critical</span>. Inputs include attendance consistency, study time, past failures, and support indicators.
+	</p>
+</section>
+
+<section>
+	<h3>Training Pipeline</h3>
+	<ol>
+		<li>Load data from <code>data/student-mat.csv</code> and supplemental records.</li>
+		<li>Preprocess: handle missing values, encode categoricals, engineer attendance rates.</li>
+		<li>Split into train/test with a fixed seed; fit the classifier.</li>
+		<li>Persist the trained model under <code>model/</code> and write metrics to <code>static/model_report.txt</code>.</li>
+	</ol>
+	<p>Retrain anytime:</p>
+	<p><code>python train_model.py</code></p>
+</section>
+
+<section>
+	<h3>Key Parameters</h3>
+	<table class="metrics-table">
+		<thead>
+			<tr>
+				<th>Parameter</th>
+				<th>Value (example)</th>
+				<th>Purpose</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>n_estimators</code></td>
+				<td>200</td>
+				<td>Controls the number of trees in the forest.</td>
+			</tr>
+			<tr>
+				<td><code>max_depth</code></td>
+				<td>None</td>
+				<td>Limits tree depth; <code>None</code> lets trees grow until pure.</td>
+			</tr>
+			<tr>
+				<td><code>class_weight</code></td>
+				<td>balanced</td>
+				<td>Offsets class imbalance across risk bands.</td>
+			</tr>
+			<tr>
+				<td><code>random_state</code></td>
+				<td>42</td>
+				<td>Ensures reproducible splits and training.</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<section>
+	<h3>Evaluation Metrics</h3>
+	<div class="stats">
+		<span class="stat">Precision</span>
+		<span class="stat">Recall</span>
+		<span class="stat">F1-Score</span>
+		<span class="stat">Accuracy</span>
+	</div>
+	<p>See the latest detailed report in <code>static/model_report.txt</code> or the <a href="/results">Results</a> page.</p>
+</section>
+
+<section>
+	<h3>Confusion Matrix (Conceptual)</h3>
+	<table class="matrix">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Pred: Safe</th>
+				<th>Pred: At Risk</th>
+				<th>Pred: Critical</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="row-label">Actual: Safe</td>
+				<td>TP</td>
+				<td>FP</td>
+				<td>FP</td>
+			</tr>
+			<tr>
+				<td class="row-label">Actual: At Risk</td>
+				<td>FN</td>
+				<td>TP</td>
+				<td>FP</td>
+			</tr>
+			<tr>
+				<td class="row-label">Actual: Critical</td>
+				<td>FN</td>
+				<td>FN</td>
+				<td>TP</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>Numbers vary per training run; refer to the results page for real values.</p>
+</section>
+
+<section>
+	<h3>Tips</h3>
+	<ul>
+		<li>Check class balance and consider <code>class_weight</code> or resampling.</li>
+		<li>Evaluate feature importance; prune noisy or redundant features.</li>
+		<li>Retrain periodically to align with new cohorts and data shifts.</li>
+	</ul>
+</section>
+{% endblock %}

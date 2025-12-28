@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dataset</h2>
+
+<section>
+	<h3>Overview</h3>
+	<p>
+		This app uses curated student datasets to understand how attendance and related academic factors correlate with performance risk. The primary source is the well-known student performance dataset.
+	</p>
+</section>
+
+<section>
+	<h3>Files in Use</h3>
+	<div class="grid">
+		<div class="card">
+			<h4>Core Dataset</h4>
+			<p><code>data/student-mat.csv</code></p>
+			<p>Base academic records used for training and evaluation.</p>
+		</div>
+		<div class="card">
+			<h4>Supplementary Records</h4>
+			<p><code>data/student_data.csv</code></p>
+			<p>Additional fields aligned to the core dataset for experiments.</p>
+		</div>
+	</div>
+</section>
+
+<section>
+	<h3>Feature Highlights</h3>
+	<ul>
+		<li>Attendance consistency and frequency indicators.</li>
+		<li>Study time and past academic performance signals.</li>
+		<li>Support variables (e.g., family/guardian, school engagement).</li>
+		<li>Derived features engineered during preprocessing.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Preprocessing Checklist</h3>
+	<ul>
+		<li>Handle missing values and normalize categorical encodings.</li>
+		<li>Align schema across files and remove duplicate entries.</li>
+		<li>Create attendance rate features and composite indices.</li>
+		<li>Split train/test with consistent random seed for reproducibility.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Sample Columns</h3>
+	<table class="data-table">
+		<thead>
+			<tr>
+				<th>Column</th>
+				<th>Description</th>
+				<th>Type</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>attendance_rate</code></td>
+				<td>Derived ratio indicating attendance consistency.</td>
+				<td>Numeric</td>
+			</tr>
+			<tr>
+				<td><code>study_time</code></td>
+				<td>Weekly hours spent studying.</td>
+				<td>Numeric</td>
+			</tr>
+			<tr>
+				<td><code>past_failures</code></td>
+				<td>Count of prior course failures.</td>
+				<td>Numeric</td>
+			</tr>
+			<tr>
+				<td><code>support_flags</code></td>
+				<td>Indicators for academic support (school/family).</td>
+				<td>Categorical</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<section>
+	<h3>Privacy & Responsible Use</h3>
+	<ul>
+		<li>Store datasets securely and use anonymized identifiers where possible.</li>
+		<li>Predictions assist decisions; they do not replace educator judgment.</li>
+		<li>Retrain periodically to reflect new cohorts and data distributions.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Quick Steps</h3>
+	<ol>
+		<li>Review data files listed above.</li>
+		<li>Retrain the model with <code>python train_model.py</code>.</li>
+		<li>Inspect evaluation on the <a href="/results">Results</a> page.</li>
+		<li>Use <a href="/predict" class="cta">Predict</a> to score new profiles.</li>
+	</ol>
+</section>
+{% endblock %}

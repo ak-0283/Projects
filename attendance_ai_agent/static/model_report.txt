@@ -1,0 +1,13 @@
+MODEL EVALUATION REPORT
+
+Accuracy: 72.15%
+
+              precision    recall  f1-score   support
+
+     At Risk       0.58      0.58      0.58        26
+    Critical       0.73      0.81      0.77        27
+        Safe       0.87      0.77      0.82        26
+
+    accuracy                           0.72        79
+   macro avg       0.73      0.72      0.72        79
+weighted avg       0.73      0.72      0.72        79

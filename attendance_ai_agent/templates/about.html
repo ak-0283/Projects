@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hero">
+	<h1>About The AI Attendance System</h1>
+	<p>Data-driven insights to identify student performance risk early and support timely intervention.</p>
+	<a href="/predict" class="cta">Try Prediction</a>
+	<a href="/results" class="cta" style="margin-left:10px;">View Results</a>
+	</div>
+
+<section>
+	<h3>Mission</h3>
+	<p>
+		Our goal is to translate attendance and academic signals into clear, actionable risk categories — <span class="badge safe">Safe</span>, <span class="badge risk">At Risk</span>, and <span class="badge critical">Critical</span> — so educators can intervene before outcomes decline.
+	</p>
+</section>
+
+<section>
+	<h3>System Architecture</h3>
+	<ul>
+		<li><strong>Frontend</strong>: Flask templates in <code>templates/</code> with clean, responsive CSS under <code>static/style.css</code>.</li>
+		<li><strong>Backend</strong>: Python Flask app (`app.py`) serving routes for home, dataset, model, results, predict, and contact.</li>
+		<li><strong>Model</strong>: Trained classifier saved in <code>model/</code>, loaded for real-time predictions on the <a href="/predict">Predict</a> page.</li>
+		<li><strong>Artifacts</strong>: Training metrics and report saved in <code>static/model_report.txt</code> for transparency.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Model Details</h3>
+	<p>
+		The project currently uses a robust tree-based ensemble (e.g., Random Forest) to classify risk. Key signals include attendance consistency, study time, past failures, parental support, and relevant demographic/academic features.
+	</p>
+	<ul>
+		<li><strong>Target</strong>: Performance risk band prediction.</li>
+		<li><strong>Inputs</strong>: Attendance frequency, study habits, academic history, support variables.</li>
+		<li><strong>Training Script</strong>: <code>train_model.py</code> — reproducible, easy to re-run.</li>
+		<li><strong>Evaluation</strong>: Precision, recall, F1, confusion matrix (see <a href="/results">Results</a>).</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Dataset</h3>
+	<p>
+		The system uses curated student datasets including <code>data/student-mat.csv</code> and supplemental records in <code>data/student_data.csv</code>.
+	</p>
+	<ul>
+		<li><strong>Cleaning</strong>: Handle missing values, normalize categorical fields, and align schemas.</li>
+		<li><strong>Feature Engineering</strong>: Derive attendance rates and composite study indicators.</li>
+		<li><strong>Reproducibility</strong>: Retrain anytime with <code>python train_model.py</code>.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Core Features</h3>
+	<div class="grid">
+		<div class="card">
+			<h4>Attendance-Aware Predictions</h4>
+			<p>Quantifies how attendance patterns influence risk classification.</p>
+		</div>
+		<div class="card">
+			<h4>Transparent Metrics</h4>
+			<p>View evaluation metrics and confusion matrix on the Results page.</p>
+		</div>
+		<div class="card">
+			<h4>Simple Web UI</h4>
+			<p>Clean, responsive interface for browsing datasets and making predictions.</p>
+		</div>
+		<div class="card">
+			<h4>Re-train Anytime</h4>
+			<p>Run <code>train_model.py</code> to refresh the model and reports.</p>
+		</div>
+	</div>
+</section>
+
+<section>
+	<h3>Using the App</h3>
+	<ol>
+		<li>Review inputs on the <a href="/dataset">Dataset</a> page.</li>
+		<li>Train or refresh with <code>python train_model.py</code>.</li>
+		<li>Browse metrics on <a href="/results">Results</a>.</li>
+		<li>Score profiles via <a href="/predict" class="cta">Predict</a>.</li>
+	</ol>
+</section>
+
+<section>
+	<h3>Roadmap</h3>
+	<ul>
+		<li>Feature importance visualization and SHAP explanations.</li>
+		<li>Exportable intervention plans per risk band.</li>
+		<li>Admin dashboard for cohort-level monitoring.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Credits</h3>
+	<p>
+		Built by Abhay Kumar (BCA Final Year). Contributions and feedback are welcome.
+	</p>
+</section>
+
+<section>
+	<h3>Contact</h3>
+	<p>Questions or suggestions? Visit <a href="/contact">Contact</a> to reach out.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>AI Attendance & Performance Prediction System</h2>
+<p>
+An end-to-end web app that analyzes student data and attendance trends to predict academic risk levels — Safe, At Risk, or Critical — so you can take timely, targeted action.
+</p>
+
+<section>
+	<h3>What This System Does</h3>
+	<ul>
+		<li>Transforms raw student records into meaningful predictors of performance.</li>
+		<li>Classifies each student into risk bands: <strong>Safe</strong>, <strong>At Risk</strong>, <strong>Critical</strong>.</li>
+		<li>Highlights attendance patterns correlated with performance outcomes.</li>
+		<li>Supports early intervention with data-backed insights.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>How It Works</h3>
+	<ol>
+		<li><strong>Data</strong>: Uses the curated dataset in <code>data/student-mat.csv</code> along with additional student records like <code>data/student_data.csv</code>.</li>
+		<li><strong>Features</strong>: Attendance frequency, study time, past failures, family support, and other academic/context variables.</li>
+		<li><strong>Model Training</strong>: Run <code>train_model.py</code> to train and evaluate the classifier; reports are saved to <code>static/model_report.txt</code>.</li>
+		<li><strong>Prediction</strong>: The trained model (stored under <code>model/</code>) powers the <a href="/predict">Predict</a> page for on-demand scoring.</li>
+	</ol>
+</section>
+
+<section>
+	<h3>Key Features</h3>
+	<ul>
+		<li><strong>Attendance-aware insights</strong>: Quantifies how attendance impacts predicted performance risk.</li>
+		<li><strong>Simple web UI</strong>: Navigate via the top menu; no complex setup needed.</li>
+		<li><strong>Reproducible training</strong>: One command to re-train and refresh results.</li>
+		<li><strong>Transparent metrics</strong>: See precision/recall/F1 and confusion matrix on the <a href="/results">Results</a> page.</li>
+		<li><strong>Actionable categories</strong>: Risk bands mapped to suggested interventions.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Quick Start</h3>
+	<ol>
+		<li>Open the <a href="/dataset">Dataset</a> page to review inputs.</li>
+		<li>Train or refresh the model by running <code>python train_model.py</code> in your workspace.</li>
+		<li>Check evaluation details on <a href="/results">Results</a>.</li>
+		<li>Use <a href="/predict" class="cta">Predict</a> to score a student profile.</li>
+	</ol>
+</section>
+
+<section>
+	<h3>Risk Bands & Suggested Actions</h3>
+	<ul>
+		<li><span class="badge safe">Safe</span>: Maintain current study plan; periodic check-ins.</li>
+		<li><span class="badge risk">At Risk</span>: Increase attendance consistency; add weekly tutoring or mentoring.</li>
+		<li><span class="badge critical">Critical</span>: Immediate academic support plan; attendance contract; parental engagement.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Model & Data Transparency</h3>
+	<p>
+		Training artifacts and performance reports are kept within the project for auditability:
+	</p>
+	<ul>
+		<li><code>model/</code>: Serialized trained model and related files.</li>
+		<li><code>static/model_report.txt</code>: Latest metrics snapshot after training.</li>
+		<li><code>data/student-mat.csv</code>: Base dataset used for experiments.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Privacy & Responsible Use</h3>
+	<ul>
+		<li>Use anonymized identifiers when possible and store data securely.</li>
+		<li>Predictions assist decisions; they do not replace educator judgment.</li>
+		<li>Retrain periodically to keep the model aligned with new cohorts.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>FAQ</h3>
+	<p><strong>Does this require internet?</strong> No, all processing runs locally in this app.</p>
+	<p><strong>Can I add new features?</strong> Yes — extend feature engineering in <code>train_model.py</code> and retrain.</p>
+	<p><strong>Where do I see accuracy?</strong> Open the <a href="/results">Results</a> page or check <code>static/model_report.txt</code>.</p>
+</section>
+
+<section>
+	<h3>Get Started</h3>
+	<p>
+		Ready to explore? Head to the <a href="/predict" class="cta">Predict</a> page to try the model, or learn more on <a href="/about">About</a>.
+	</p>
+</section>
+{% endblock %}

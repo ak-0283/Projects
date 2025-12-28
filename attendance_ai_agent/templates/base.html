@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Attendance Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">AI Attendance</div>
+
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+
+        <nav class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/dataset">Dataset</a>
+            <a href="/model">Model</a>
+            <a href="/results">Results</a>
+            <a href="/predict" class="cta">Predict</a>
+            <a href="/contact">Contact</a>
+            <!-- Theme toggle (top-right) -->
+            <input type="checkbox" id="theme-toggle">
+            <label for="theme-toggle" class="theme-toggle" title="Toggle dark/light"></label>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT (EXPANDS) -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER (STICKS TO BOTTOM) -->
+    <footer class="footer">
+        <p>© 2025 AI Attendance & Performance Prediction System</p>
+        <p>Developed by Abhay Kumar | BCA Final Year</p>
+    </footer>
+
+</div>
+
+<!-- Scroll to Top Button (visible after scrolling) -->
+<button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top" title="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 4l-7 7h4v7h6v-7h4l-7-7z"/>
+    </svg>
+    <span class="sr-only">Top</span>
+    </button>
+
+<script>
+// Persist and toggle dark/light theme
+(function() {
+    var KEY = 'theme';
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var initial = saved ? saved : (prefersDark ? 'dark' : 'light');
+    document.body.setAttribute('data-theme', initial);
+    var toggle = document.getElementById('theme-toggle');
+    if (toggle) {
+        toggle.checked = initial === 'dark';
+        toggle.addEventListener('change', function() {
+            var mode = this.checked ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', mode);
+            try { localStorage.setItem(KEY, mode); } catch (e) {}
+        });
+    }
+})();
+
+// Scroll-to-top button behavior
+(function() {
+    var btn = document.getElementById('scrollTopBtn');
+    if (!btn) return;
+    var showAt = 200; // px
+    var onScroll = function() {
+        if (window.scrollY > showAt) {
+            btn.classList.add('show');
+        } else {
+            btn.classList.remove('show');
+        }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
+</script>
+
+</body>
+</html>

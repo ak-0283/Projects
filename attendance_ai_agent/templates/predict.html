@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Predict Student Risk</h2>
+<form method="post">
+<input name="attendance" placeholder="Attendance %" required>
+<input name="marks" placeholder="Marks %" required>
+<input name="assignments" placeholder="Assignments %" required>
+<input name="classes_missed" placeholder="Classes Missed" required>
+<button>Predict</button>
+</form>
+
+{% if prediction %}
+<h3>{{ prediction }}</h3>
+<p>{{ suggestion }}</p>
+{% endif %}
+{% endblock %}
