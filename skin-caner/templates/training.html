@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="training-hero">
+    <div class="section-inner">
+        <h1>Model Training Results</h1>
+        <p>
+            Core training summary and key model visualizations.
+        </p>
+    </div>
+</section>
+
+<section class="training-overview">
+    <div class="section-inner">
+        <h2>Quick Configuration</h2>
+        
+        <div class="config-grid">
+            <div class="config-card">
+                <span class="config-icon">🧬</span>
+                <h3>Model</h3>
+                <div class="config-details">
+                    <div class="config-item">
+                        <span>Architecture:</span>
+                        <strong>EfficientNetB3</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Framework:</span>
+                        <strong>TensorFlow/Keras</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Total Parameters:</span>
+                        <strong>12M+</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Input Size:</span>
+                        <strong>224x224 RGB</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-card">
+                <span class="config-icon">📊</span>
+                <h3>Dataset</h3>
+                <div class="config-details">
+                    <div class="config-item">
+                        <span>Total Samples:</span>
+                        <strong>6000</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Training Set:</span>
+                        <strong>80% (4800)</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Validation Set:</span>
+                        <strong>10% (600)</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Classes:</span>
+                        <strong>3 (BKL, MEL, NV)</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-card">
+                <span class="config-icon">⚙️</span>
+                <h3>Training</h3>
+                <div class="config-details">
+                    <div class="config-item">
+                        <span>Optimizer:</span>
+                        <strong>Adam</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Learning Rate:</span>
+                        <strong>0.001</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Batch Size:</span>
+                        <strong>overall 20</strong>
+                    </div>
+                    <div class="config-item">
+                        <span>Epochs:</span>
+                        <strong>overall 25</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="performance-metrics">
+    <div class="section-inner">
+        <h2>Model Accuracy</h2>
+        
+        <div class="metrics-showcase">
+            <div class="metric-card">
+                <div class="metric-title">Pretrained</div>
+                <div class="metric-number">89%</div>
+                <div class="metric-bar">
+                    <div class="metric-progress" style="width: 89%"></div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-title">Hybrid</div>
+                <div class="metric-number">68%</div>
+                <div class="metric-bar">
+                    <div class="metric-progress" style="width: 68%"></div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-title">Custom</div>
+                <div class="metric-number">92%</div>
+                <div class="metric-bar">
+                    <div class="metric-progress" style="width: 92%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="viz-section">
+    <div class="section-inner">
+        <h2>Pretrained Visualizations</h2>
+        <p class="section-subtitle">
+            Accuracy, loss, confusion matrix, metrics, and ROC curve.
+        </p>
+
+        <div class="viz-large-grid">
+            <!-- Accuracy Chart -->
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Training & Validation Accuracy</h3>
+                    <p>Accuracy progression across epochs - shows model convergence</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='pre/accuracy.png') }}" alt="Accuracy Chart">
+                </div>
+            </div>
+
+            <!-- Loss Chart -->
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Training & Validation Loss</h3>
+                    <p>Loss reduction throughout training - indicates learning progress</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='pre/loss.png') }}" alt="Loss Chart">
+                </div>
+            </div>
+
+            <!-- Confusion Matrix -->
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Confusion Matrix</h3>
+                    <p>Classification results breakdown - shows per-class performance</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='pre/confusion.png') }}" alt="Confusion Matrix">
+                </div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Detailed Performance Metrics</h3>
+                    <p>Precision, recall, and F1-score for each class</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='pre/metrices.png') }}" alt="Performance Metrics">
+                </div>
+            </div>
+
+            <!-- ROC Curve -->
+            <div class="viz-large-card full-width">
+                <div class="viz-header">
+                    <h3>ROC Curve Analysis</h3>
+                    <p>Receiver Operating Characteristic curves for all classification classes</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='pre/roc.png') }}" alt="ROC Curve">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="viz-section">
+    <div class="section-inner">
+        <h2>Hybrid Visualizations</h2>
+        <p class="section-subtitle">
+            Accuracy, loss, confusion matrix, metrics, and ROC curve.
+        </p>
+
+        <div class="viz-large-grid">
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Training & Validation Accuracy</h3>
+                    <p>Accuracy progression across epochs</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='hybrid/accuracy.png') }}" alt="Hybrid Accuracy Chart">
+                </div>
+            </div>
+
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Training & Validation Loss</h3>
+                    <p>Loss reduction throughout training</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='hybrid/loss.png') }}" alt="Hybrid Loss Chart">
+                </div>
+            </div>
+
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Confusion Matrix</h3>
+                    <p>Classification breakdown by class</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='hybrid/confustion.png') }}" alt="Hybrid Confusion Matrix">
+                </div>
+            </div>
+
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Detailed Metrics</h3>
+                    <p>Precision, recall, and F1-score per class</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='hybrid/metrices.png') }}" alt="Hybrid Metrics">
+                </div>
+            </div>
+
+            <div class="viz-large-card full-width">
+                <div class="viz-header">
+                    <h3>ROC Curve Analysis</h3>
+                    <p>Receiver Operating Characteristic curves</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='hybrid/roc.png') }}" alt="Hybrid ROC Curve">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="viz-section">
+    <div class="section-inner">
+        <h2>Custom Visualizations</h2>
+        <p class="section-subtitle">
+            Accuracy, loss, confusion matrix, metrics, and ROC curve.
+        </p>
+
+        <div class="viz-large-grid">
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Training & Validation Accuracy</h3>
+                    <p>Accuracy progression across epochs</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='custom/accuracy.png') }}" alt="Custom Accuracy Chart">
+                </div>
+            </div>
+
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Training & Validation Loss</h3>
+                    <p>Loss reduction throughout training</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='custom/loss.png') }}" alt="Custom Loss Chart">
+                </div>
+            </div>
+
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Confusion Matrix</h3>
+                    <p>Classification breakdown by class</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='custom/confusion.png') }}" alt="Custom Confusion Matrix">
+                </div>
+            </div>
+
+            <div class="viz-large-card">
+                <div class="viz-header">
+                    <h3>Detailed Metrics</h3>
+                    <p>Precision, recall, and F1-score per class</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='custom/metrices.png') }}" alt="Custom Metrics">
+                </div>
+            </div>
+
+            <div class="viz-large-card full-width">
+                <div class="viz-header">
+                    <h3>ROC Curve Analysis</h3>
+                    <p>Receiver Operating Characteristic curves</p>
+                </div>
+                <div class="viz-large-image">
+                    <img src="{{ url_for('static', filename='custom/roc.png') }}" alt="Custom ROC Curve">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="training-cta">
+    <div class="section-inner">
+        <h2>Try Detection</h2>
+        <p>Upload your image and check predictions instantly.</p>
+        <a href="/detect" class="btn-primary large">Go to Detection Page</a>
+    </div>
+</section>
+
+{% endblock %}

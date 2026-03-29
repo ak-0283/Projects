@@ -1,0 +1,254 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- DETECT HERO -->
+<section class="detect-hero">
+    <div class="section-inner">
+        <h1>AI-Powered Skin Lesion Detection</h1>
+        <p>Upload a clear dermoscopic image and get an instant prediction.</p>
+    </div>
+</section>
+
+<!-- UPLOAD SECTION -->
+<section class="detect-upload">
+    <div class="section-inner upload-container">
+        <div class="upload-card">
+
+            <h2>Upload Your Image</h2>
+            <p class="subtitle">Select a JPG or PNG image for analysis</p>
+
+            <!-- SERVER SIDE ERROR (FLASK) -->
+            {% if error %}
+            <div class="alert alert-error">
+                <strong>Error:</strong> {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- CLIENT SUCCESS MESSAGE -->
+            <div id="successMsg" class="alert alert-success" style="display:none;">
+                <strong>Success!</strong> Image uploaded successfully.
+            </div>
+
+            <!-- CLIENT ERROR MESSAGE -->
+            <div id="clientError" class="alert alert-error" style="display:none;">
+                <strong>Error:</strong> Please upload an image before analyzing.
+            </div>
+
+            <form method="POST" enctype="multipart/form-data" id="uploadForm">
+
+                <!-- INITIAL UPLOAD -->
+                <div id="uploadInitial">
+                    <div class="upload-simple">
+                        <label for="file-input" class="file-button-large">
+                            📁 Choose Image
+                        </label>
+                        <input type="file" id="file-input" name="file" accept="image/*">
+                        <p class="upload-hint">JPG or PNG format</p>
+                    </div>
+                </div>
+
+                <!-- PREVIEW -->
+                <div id="uploadPreview" style="display:none;">
+                    <div class="preview-container">
+                        <img id="previewImg" src="" alt="Preview" style="max-width:300px;">
+                        <div class="preview-info">
+                            <p><strong>File:</strong> <span id="fileName"></span></p>
+                            <p><strong>Size:</strong> <span id="fileSize"></span></p>
+                            <p><strong>Dimensions:</strong> <span id="fileDims"></span></p>
+                            <p style="color:#28a745;font-weight:600;">
+                                ✓ Ready for analysis
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:30px;">
+                    <button type="submit" class="btn-primary detect-btn" id="analyzeBtn">
+                        🔍 Analyze Image
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</section>
+
+<!-- RESULTS -->
+{% if prediction %}
+<section class="detect-results">
+    <div class="section-inner">
+        <h2>🔍 Detection Results</h2>
+
+        <!-- MAIN RESULT CARD -->
+        <div class="result-main-card">
+            <div class="result-image-box">
+                <img src="{{ img_path }}" alt="Uploaded image" class="result-image">
+            </div>
+            <div class="result-info-box">
+                <div class="result-label">
+                    <p class="prediction-label">Prediction</p>
+                    <h3>{{ prediction }} <span class="prediction-name">{{ prediction_display }}</span></h3>
+                </div>
+                <div class="result-confidence">
+                    <p class="confidence-label">Confidence Score</p>
+                    <p class="confidence-value">{{ confidence }}%</p>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: {{ confidence }}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODEL ACCURACY COMPARISON -->
+        <div class="accuracy-compare">
+            <div class="accuracy-card">
+                <p class="accuracy-title">Pretrained Model Accuracy</p>
+                <p class="accuracy-value">{{ (pretrained_accuracy * 100) | round(2) }}%</p>
+                {% if pretrained_prediction %}
+                <p class="accuracy-sub">Prediction: <strong>{{ pretrained_prediction }}</strong></p>
+                {% endif %}
+                {% if pretrained_scores %}
+                <div class="accuracy-scores">
+                    {% for item in pretrained_scores %}
+                    <span>{{ item.label }}: {{ item.value }}%</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="accuracy-card">
+                <p class="accuracy-title">Hybrid Model Accuracy</p>
+                <p class="accuracy-value">{{ (hybrid_accuracy * 100) | round(2) }}%</p>
+                {% if hybrid_prediction %}
+                <p class="accuracy-sub">Prediction: <strong>{{ hybrid_prediction }}</strong></p>
+                {% else %}
+                <p class="accuracy-sub">Prediction: <strong>{{ prediction }}</strong></p>
+                {% endif %}
+                {% if hybrid_scores %}
+                <div class="accuracy-scores">
+                    {% for item in hybrid_scores %}
+                    <span>{{ item.label }}: {{ item.value }}%</span>
+                    {% endfor %}
+                </div>
+                {% elif pretrained_scores %}
+                <div class="accuracy-scores">
+                    {% for item in pretrained_scores %}
+                    <span>{{ item.label }}: {{ item.value }}%</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="accuracy-card">
+                <p class="accuracy-title">Custom Model Accuracy</p>
+                <p class="accuracy-value">{{ (custom_accuracy * 100) | round(2) }}%</p>
+                {% if custom_prediction %}
+                <p class="accuracy-sub">Prediction: <strong>{{ custom_prediction }}</strong></p>
+                {% else %}
+                <p class="accuracy-sub">Prediction: <strong>{{ prediction }}</strong></p>
+                {% endif %}
+                {% if custom_scores %}
+                <div class="accuracy-scores">
+                    {% for item in custom_scores %}
+                    <span>{{ item.label }}: {{ item.value }}%</span>
+                    {% endfor %}
+                </div>
+                {% elif pretrained_scores %}
+                <div class="accuracy-scores">
+                    {% for item in pretrained_scores %}
+                    <span>{{ item.label }}: {{ item.value }}%</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="accuracy-highlight">
+                {% if custom_accuracy >= hybrid_accuracy and custom_accuracy >= pretrained_accuracy %}
+                    <span>Custom model has highest static accuracy ✅</span>
+                {% elif hybrid_accuracy >= pretrained_accuracy and hybrid_accuracy >= custom_accuracy %}
+                    <span>Hybrid model has highest static accuracy ✅</span>
+                {% else %}
+                    <span>Pretrained model has highest static accuracy ✅</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- IMPORTANT NOTICE -->
+        <div class="important-notice">
+            <div class="notice-icon">⚠️</div>
+            <div class="notice-content">
+                <h4>Important Disclaimer</h4>
+                <p>This AI prediction is for awareness and educational purposes only. It is <strong>NOT a medical diagnosis</strong>. 
+                Please consult a qualified dermatologist for diagnosis and treatment.</p>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="result-actions">
+            <a href="/detect" class="btn-primary">📤 Upload Another Image</a>
+            <a href="/" class="btn-secondary">🏠 Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ================= JS (MUST BE INSIDE BLOCK) ================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const fileInput = document.getElementById("file-input");
+    const dragDropArea = document.getElementById("dragDropArea");
+    const uploadInitial = document.getElementById("uploadInitial");
+    const uploadPreview = document.getElementById("uploadPreview");
+    const successMsg = document.getElementById("successMsg");
+    const clientError = document.getElementById("clientError");
+    const uploadForm = document.getElementById("uploadForm");
+
+    function showPreview(file) {
+
+        if (!file || !file.type.startsWith("image/")) {
+            clientError.style.display = "flex";
+            clientError.innerText = "Error: Please upload a valid image file.";
+            return;
+        }
+
+        clientError.style.display = "none";
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+
+            const img = new Image();
+            img.onload = function () {
+
+                document.getElementById("previewImg").src = e.target.result;
+                document.getElementById("fileName").innerText = file.name;
+                document.getElementById("fileSize").innerText =
+                    (file.size / (1024 * 1024)).toFixed(2) + " MB";
+                document.getElementById("fileDims").innerText =
+                    img.width + " x " + img.height;
+
+                uploadInitial.style.display = "none";
+                uploadPreview.style.display = "block";
+                successMsg.style.display = "flex";
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    fileInput.addEventListener("change", function () {
+        if (this.files[0]) {
+            showPreview(this.files[0]);
+        }
+    });
+
+    uploadForm.addEventListener("submit", function (e) {
+        if (!fileInput.files.length) {
+            e.preventDefault();
+            clientError.style.display = "flex";
+        }
+    });
+
+});
+</script>
+
+{% endblock %}

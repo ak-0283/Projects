@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="about-hero">
+    <div class="section-inner">
+        <span class="eyebrow">About SkinCare AI</span>
+        <h1>Supporting Early Awareness with AI</h1>
+        <p>
+            SkinCare AI is a deep-learning powered web application that helps users
+            screen skin lesions using dermoscopic images. The goal is to provide fast,
+            clear predictions that support early awareness and informed next steps.
+        </p>
+    </div>
+</section>
+
+<section class="about-details">
+    <div class="section-inner about-grid">
+        <div class="about-card">
+            <h3>What It Does</h3>
+            <p>
+                Upload a skin image and receive an instant classification across three
+                lesion types: BKL, MEL, and NV. Each prediction is paired with a
+                confidence score for transparency.
+            </p>
+        </div>
+        <div class="about-card">
+            <h3>How It Works</h3>
+            <p>
+                The model is built on EfficientNet and trained on curated dermoscopic
+                datasets. Uploaded images are preprocessed, normalized, and then passed
+                through the neural network for prediction.
+            </p>
+        </div>
+        <div class="about-card">
+            <h3>Why It Matters</h3>
+            <p>
+                Early awareness can make a real difference. This tool is designed to
+                complement medical consultation by helping users recognize patterns
+                that may need attention.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="about-disclaimer">
+    <div class="section-inner disclaimer-card">
+        <h3>Medical Disclaimer</h3>
+        <p>
+            SkinCare AI is an educational tool and is not a substitute for professional
+            medical advice, diagnosis, or treatment. If you have concerns, consult a
+            certified dermatologist.
+        </p>
+    </div>
+</section>
+
+{% endblock %}

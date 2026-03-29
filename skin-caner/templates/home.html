@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-content">
+            <span class="eyebrow">AI Assistant for Early Awareness</span>
+            <h1>Skin Cancer Detection</h1>
+            <p>
+                Upload a dermoscopic image and get an instant prediction with confidence scores.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="/detect" class="btn-primary">Start Detection</a>
+                <a href="/about" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="section-inner">
+        <h2>Why SkinCare AI?</h2>
+        <p class="section-subtitle">
+            Simple and fast image analysis for early awareness.
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>Instant Results</h3>
+                <p>Get predictions in seconds.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🧠</div>
+                <h3>AI Powered</h3>
+                <p>Uses trained deep learning models.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🔒</div>
+                <h3>Private</h3>
+                <p>Images are processed for prediction only.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="how-it-works">
+    <div class="section-inner">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <span>1</span>
+                <h3>Upload Image</h3>
+                <p>Select a clear image of the skin lesion.</p>
+            </div>
+
+            <div class="step">
+                <span>2</span>
+                <h3>AI Analysis</h3>
+                <p>The model evaluates patterns and irregularities.</p>
+            </div>
+
+            <div class="step">
+                <span>3</span>
+                <h3>Get Prediction</h3>
+                <p>Receive instant results with confidence metrics.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="section-inner">
+        <h2>Start Detection</h2>
+        <p>Upload an image and check the result.</p>
+        <a href="/detect" class="btn-primary large">Upload Image Now</a>
+    </div>
+</section>
+
+{% endblock %}

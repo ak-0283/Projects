@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skin Cancer Detection AI</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- GOOGLE FONT (VERY IMPORTANT FOR MODERN UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="navbar-inner">
+        <div class="navbar-brand">
+            <a href="/" class="logo">
+                <span class="logo-icon">🏥</span>
+                <span class="logo-text">SkinCare <span class="highlight">AI</span></span>
+            </a>
+        </div>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/about" class="nav-link">About</a>
+            <a href="/training" class="nav-link">Training</a>
+            <a href="/detect" class="nav-link detect-link">Detect Now</a>
+            <a href="/contact" class="nav-link">Contact</a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top" title="Back to top">↑</button>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+    <div class="section-inner footer-inner">
+        <div class="footer-brand">
+            <h3>SkinCare <span>AI</span></h3>
+            <p>
+                AI-powered skin lesion screening built for early awareness.
+                Fast, private, and easy to use.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/detect">Detect</a>
+            <a href="/contact">Contact</a>
+        </div>
+
+        <div class="footer-contact">
+            <h4>Contact</h4>
+            <p>Email: support@skincareai.com</p>
+            <p>Hours: Mon – Sat, 10AM – 6PM</p>
+            <p>Location: Remote Support</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 SkinCare AI. For awareness only, not a medical diagnosis.</p>
+    </div>
+</footer>
+
+<script>
+function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+}
+
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('hamburger').classList.remove('active');
+        document.getElementById('navLinks').classList.remove('active');
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar.contains(e.target)) {
+        document.getElementById('hamburger').classList.remove('active');
+        document.getElementById('navLinks').classList.remove('active');
+    }
+});
+
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+const toggleScrollTopBtn = () => {
+    if (window.scrollY > 260) {
+        scrollTopBtn.classList.add('show');
+    } else {
+        scrollTopBtn.classList.remove('show');
+    }
+};
+
+window.addEventListener('scroll', toggleScrollTopBtn);
+toggleScrollTopBtn();
+
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+# =============================
+# Python cache / build
+# =============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+build/
+dist/
+
+# =============================
+# Virtual environments
+# =============================
+.venv/
+venv/
+env/
+ENV/
+
+# =============================
+# Local environment / secrets
+# =============================
+.env
+.env.*
+!.env.example
+
+# =============================
+# Editor / OS files
+# =============================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# =============================
+# Logs / runtime artifacts
+# =============================
+*.log
+logs/
+tmp/
+temp/
+
+# =============================
+# Jupyter artifacts
+# =============================
+.ipynb_checkpoints/
+
+# =============================
+# Dataset (do not push raw data)
+# =============================
+dataset/**
+!dataset/.gitkeep
+
+# =============================
+# Trained model binaries (large)
+# Keep notebooks/scripts, ignore weights
+# =============================
+models/**/*.h5
+models/**/*.keras
+models/**/*.ckpt
+models/**/*.pt
+models/**/*.pth
+models/**/*.onnx
+
+# =============================
+# Optional generated charts/exports
+# Uncomment if these are regenerated locally
+# =============================
+# static/pre/*.png
+# static/custom/*.png
+# static/hybrid/*.png
+
+# =============================
+# Docker (local/runtime artifacts)
+# Keep deployment files tracked
+# =============================
+docker-compose.override.yml
+*.pid
+*.cid
+.docker/
+docker-data/
+*.tar
+*.tar.gz
+
+!Dockerfile
+!docker-compose.yml

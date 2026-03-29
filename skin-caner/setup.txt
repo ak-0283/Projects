@@ -1,0 +1,6 @@
+to run this 
+first setup 
+1. pip install -r requirements.txt
+
+to run this system
+2. python app.py

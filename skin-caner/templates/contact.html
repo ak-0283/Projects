@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- CONTACT HERO -->
+
+<section class="contact-hero">
+    <div class="section-inner">
+        <h1>Get In Touch</h1>
+        <p>
+            Have questions about SkinCare AI? Send us a message.
+        </p>
+    </div>
+</section>
+
+<!-- CONTACT CONTENT -->
+
+<section class="contact-section">
+    <div class="section-inner contact-grid">
+        
+        <!-- CONTACT FORM -->
+        <div class="contact-form-box">
+            <h2>Send us a Message</h2>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Send Message</button>
+                <p class="form-note">We'll respond within 24 hours.</p>
+            </form>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div class="contact-info-box">
+            <h2>Contact Information</h2>
+
+            <div class="info-card">
+                <div class="info-icon">📧</div>
+                <h4>Email</h4>
+                <p>
+                    <a href="mailto:support@skincareai.com">support@skincareai.com</a>
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📱</div>
+                <h4>Phone</h4>
+                <p>+1 (555) 123-4567</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🕐</div>
+                <h4>Business Hours</h4>
+                <p>
+                    Monday – Friday: 10AM – 6PM<br>
+                    Saturday: 11AM – 4PM<br>
+                    Sunday: Closed
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <h4>Location</h4>
+                <p>
+                    Remote Support Available
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+<script>
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! We will respond shortly.');
+        this.reset();
+    });
+}
+</script>
