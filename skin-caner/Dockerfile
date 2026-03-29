@@ -4,6 +4,10 @@ FROM python:3.10-slim
 # Set working directory in container
 WORKDIR /app
 
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PORT=5000
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
@@ -21,9 +25,5 @@ COPY . .
 # Expose port
 EXPOSE 5000
 
-# Set environment variables
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=production
-
 # Run the application
-CMD ["python", "app.py"]
+CMD ["sh", "-c", "gunicorn --workers 1 --threads 4 --timeout 120 --bind 0.0.0.0:${PORT} app:app"]

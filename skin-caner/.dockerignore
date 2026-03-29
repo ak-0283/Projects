@@ -10,10 +10,13 @@ venv/
 .git
 .gitignore
 .dockerignore
-Dockerfile
-docker-compose.yml
 *.md
 .DS_Store
 .vscode
 .idea
 *.log
+dataset/
+**/.ipynb_checkpoints/
+models/**/*.ipynb
+tmp/
+temp/
