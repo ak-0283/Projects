@@ -66,7 +66,7 @@ if model is None and os.path.exists(MODEL_PATH):
         raise
 
 if model is None:
-    raise RuntimeError("Could not load any model file!")
+    print("[WARN] Pretrained model could not be loaded. Detection may be unavailable until model files are present.")
 
 hybrid_model = None
 if os.path.exists(MODEL_HYBRID_PATH):
@@ -201,16 +201,37 @@ def detect():
 
         if file and file.filename != "":
             try:
+                if model is None and hybrid_model is None and custom_model is None:
+                    error = "No model files are available on the server. Please deploy required .h5/.keras model files."
+                    return render_template(
+                        'detect.html',
+                        prediction=prediction,
+                        prediction_display=prediction_display,
+                        pretrained_prediction=pretrained_prediction,
+                        hybrid_prediction=hybrid_prediction,
+                        custom_prediction=custom_prediction,
+                        pretrained_scores=pretrained_scores,
+                        hybrid_scores=hybrid_scores,
+                        custom_scores=custom_scores,
+                        confidence=confidence,
+                        img_path=img_path,
+                        error=error,
+                        pretrained_accuracy=PRETRAINED_ACCURACY,
+                        hybrid_accuracy=HYBRID_ACCURACY,
+                        custom_accuracy=CUSTOM_ACCURACY
+                    )
+
                 file_bytes = file.read()
                 if file_bytes:
                     pil_image = Image.open(io.BytesIO(file_bytes))
-                    pretrained_prediction, confidence, pretrained_scores = predict_image_with_model(
-                        pil_image,
-                        model,
-                        preprocess_mode="efficientnet"
-                    )
 
-                    prediction = pretrained_prediction
+                    if model is not None:
+                        pretrained_prediction, confidence, pretrained_scores = predict_image_with_model(
+                            pil_image,
+                            model,
+                            preprocess_mode="efficientnet"
+                        )
+                        prediction = pretrained_prediction
 
                     if hybrid_model is not None:
                         hybrid_prediction, hybrid_confidence, hybrid_scores = predict_image_with_model(
@@ -230,7 +251,10 @@ def detect():
                         prediction = custom_prediction
                         confidence = custom_confidence
 
-                    prediction_display = CLASS_DISPLAY.get(prediction, prediction)
+                    if prediction is None:
+                        error = "Prediction failed because no compatible model is loaded."
+                    else:
+                        prediction_display = CLASS_DISPLAY.get(prediction, prediction)
                     img_path = f"data:image/jpeg;base64,{base64.b64encode(file_bytes).decode('utf-8')}"
             except Exception as e:
                 error = f"Error processing image: {str(e)}"
@@ -266,4 +290,5 @@ def contact():
 # ------------------------------------------------
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", "5000"))
+    app.run(host="0.0.0.0", port=port, debug=False)
